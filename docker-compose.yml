@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
   orders-api:
+    container_name: orders-api
     build: .
     ports:
       - "3000:3000"
@@ -11,10 +10,13 @@ services:
       - DB_PASSWORD=mypassword
       - DB_NAME=ordersdb
       - DB_PORT=5432
+      - LOG_LEVEL=info
+      - SERVICE_NAME=orders-api
     depends_on:
       - postgres
 
   postgres:
+    container_name: postgres
     image: postgres:15-alpine
     environment:
       - POSTGRES_USER=myuser
